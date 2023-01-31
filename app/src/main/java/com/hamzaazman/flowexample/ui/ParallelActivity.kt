@@ -9,19 +9,21 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamzaazman.flowexample.common.NetworkConnectivityObserver
 import com.hamzaazman.flowexample.common.Resource
 import com.hamzaazman.flowexample.data.api.ConnectivityObserver
-import com.hamzaazman.flowexample.databinding.ActivityParalelBinding
+import com.hamzaazman.flowexample.databinding.ActivityParallelBinding
 import com.hamzaazman.flowexample.ui.adapter.CommentAdapter
 import com.hamzaazman.flowexample.ui.adapter.PostAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ParalelActivity : AppCompatActivity() {
+class ParallelActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityParalelBinding
+    private lateinit var binding: ActivityParallelBinding
 
     private val viewModel: MainViewModel by viewModels()
     private val postAdapter: PostAdapter by lazy { PostAdapter() }
@@ -29,7 +31,7 @@ class ParalelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityParalelBinding.inflate(layoutInflater)
+        binding = ActivityParallelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupRv()
@@ -39,7 +41,7 @@ class ParalelActivity : AppCompatActivity() {
 
     private fun initCollect() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.posts.collect {
                         with(binding) {
@@ -86,7 +88,7 @@ class ParalelActivity : AppCompatActivity() {
                     }
                 }
 
-                NetworkConnectivityObserver(this@ParalelActivity).observe().collect {
+                NetworkConnectivityObserver(this@ParallelActivity).observe().collect {
                     when (it) {
                         ConnectivityObserver.Status.Available -> {
                             Log.d("Networkkkk", "İnternet var")
@@ -112,13 +114,22 @@ class ParalelActivity : AppCompatActivity() {
         with(binding) {
             paralelPostRecyclerView.apply {
                 adapter = postAdapter
+                addItemDecoration(
+                    DividerItemDecoration(
+                        this@ParallelActivity, LinearLayoutManager.VERTICAL
+                    )
+                )
             }
 
             paralelCommantRecyclerView.apply {
                 adapter = commentAdapter
+                addItemDecoration(
+                    DividerItemDecoration(
+                        this@ParallelActivity, LinearLayoutManager.VERTICAL
+                    )
+                )
             }
         }
     }
-
 
 }

@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonParalel.setOnClickListener {
-            val intent = Intent(this@MainActivity, ParalelActivity::class.java)
+        binding.buttonParallel.setOnClickListener {
+            val intent = Intent(this@MainActivity, ParallelActivity::class.java)
             startActivity(intent)
         }
 

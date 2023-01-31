@@ -17,7 +17,7 @@
         android:theme="@style/Theme.FlowExample"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ParalelActivity"
+            android:name=".ui.ParallelActivity"
             android:exported="false"
             android:label="@string/title_activity_paralel"
             android:theme="@style/Theme.FlowExample.NoActionBar">
