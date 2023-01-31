@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/postErrorAnim"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="@+id/paralelPostRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userTitleTextView"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/paralel_error" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/paralelPostRecyclerView"
         android:layout_width="match_parent"
@@ -32,11 +43,11 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:indeterminateTint="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/paralelPostRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userTitleTextView" />
-
 
     <TextView
         android:id="@+id/commentTitleTextView"
@@ -60,11 +71,23 @@
         app:layout_constraintTop_toBottomOf="@+id/commentTitleTextView"
         tools:listitem="@layout/post_item_row" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/commentErrorAnim"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="@+id/paralelCommantRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentTitleTextView"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/paralel_error" />
+
     <ProgressBar
         android:id="@+id/commentLoading"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:indeterminateTint="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

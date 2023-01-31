@@ -2,7 +2,6 @@ package com.hamzaazman.flowexample.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
@@ -38,7 +37,6 @@ class ParalelActivity : AppCompatActivity() {
 
     }
 
-
     private fun initCollect() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -50,9 +48,13 @@ class ParalelActivity : AppCompatActivity() {
                                     postLoading.isVisible = true
                                 }
                                 is Resource.Error -> {
+                                    postLoading.isGone = true
+                                    postErrorAnim.playAnimation()
                                 }
                                 is Resource.Success -> {
+                                    postErrorAnim.isGone = true
                                     postLoading.isGone = true
+                                    paralelPostRecyclerView.isVisible = true
                                     paralelPostRecyclerView.apply {
                                         postAdapter.submitList(it.data)
                                     }
@@ -69,9 +71,12 @@ class ParalelActivity : AppCompatActivity() {
                                     commentLoading.isVisible = true
                                 }
                                 is Resource.Error -> {
+                                    commentLoading.isGone = true
+                                    commentErrorAnim.playAnimation()
                                 }
                                 is Resource.Success -> {
                                     commentLoading.isGone = true
+                                    paralelCommantRecyclerView.isVisible = true
                                     paralelCommantRecyclerView.apply {
                                         commentAdapter.submitList(it.data)
                                     }
@@ -91,7 +96,10 @@ class ParalelActivity : AppCompatActivity() {
                             }
                         }
                         ConnectivityObserver.Status.Losing -> {
-                            Log.d("Networkkkk", "İnternet kaybeetik seni")
+                            Log.d("Networkkkk", "İnterneti kaybediyoruz seni")
+                        }
+                        ConnectivityObserver.Status.Lost -> {
+                            Log.d("Networkkkk", "İnterneti kaybettik")
                         }
                         else -> {}
                     }

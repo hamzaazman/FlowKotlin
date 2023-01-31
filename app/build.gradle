@@ -78,5 +78,9 @@ dependencies {
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
 
+    def lottieVersion = "5.2.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+
 }
 def lifecycle_version = "2.6.0-alpha03"
